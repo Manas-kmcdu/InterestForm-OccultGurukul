@@ -342,6 +342,19 @@ select option{background:#fff;color: var(--dark)}
 .subcat-btn .sb-dot { width:6px;height:6px;border-radius:50%;background:#FFD700;display:none;flex-shrink:0; }
 .subcat-btn.has-sel .sb-dot { display:block; }
 
+@media(max-width: 600px) {
+  .overlay-body { grid-template-columns: 110px 1fr; min-height: 300px; }
+  .overlay-panel { padding: 12px 8px; }
+  .overlay-box { border-radius: 8px; }
+  .overlay-top { padding: 14px 16px 12px; }
+  .subcat-btn { padding: 9px 10px; font-size: 9px; letter-spacing: .02em; gap: 4px; }
+  .subcat-btn .sb-count { display: none; }
+  .overlay-content { padding: 14px 12px; max-height: 60vh; }
+  .course-grid-5 { grid-template-columns: repeat(2,1fr) !important; gap: 6px; }
+  .ct { padding: 8px 8px; }
+  .ct-txt { font-size: 12px; }
+  .overlay-footer { padding: 10px 16px; }
+}
 /* Course content area */
 .overlay-content {
   padding: 20px 24px;
