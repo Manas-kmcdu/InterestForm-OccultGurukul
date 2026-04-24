@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Occult Gurukul - Mentor Interest Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --m:       #7211C6;
+  --m2:      #9B3FE8;
+  --m-pale:  #2A0A4A;
+  --m-light: #3D1566;
+  --m-mid:   #C078F0;
+  --white:   #ffffff;
+  --off:     #FAF8FC;
+  --bg:      #F5F0FA;
+  --dark:    #150022;
+  --mid:     #2D0052;
+  --soft:    #5A1099;
+  --hint:    #8833BB;
+  --border:  #D4A8F5;
+  --red:     #b83030;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body {
+  background: var(--bg);
+  font-family: 'EB Garamond', serif;
+  color: var(--dark);
+  min-height: 100vh;
+  padding: 32px 16px 80px;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; }
+
+/* ── HEADER ── */
+.hdr {
+  background: linear-gradient(150deg, #7211C6 0%, #9B3FE8 45%, #5A0FA0 100%);
+  border-radius: 8px 8px 0 0;
+  padding: 44px 40px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(114,17,198,.35);
+}
+.hdr::after {
+  content:'';position:absolute;inset:0;
+  background: radial-gradient(ellipse at 50% -10%, rgba(255,255,255,.2) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hdr-icon { font-size:48px; display:block; margin-bottom:12px; animation: bob 4s ease-in-out infinite alternate; }
+@keyframes bob{ from{transform:translateY(0)} to{transform:translateY(-6px)} }
+.hdr h1 {
+  font-family:'Cinzel Decorative',normal;
+  font-size: clamp(19px,4vw,26px);
+  color:#fff; letter-spacing:.06em; line-height:1.3;
+  text-shadow:0 2px 6px rgba(0,0,0,.18);
+  margin-bottom:5px; position:relative;
+}
+.hdr .sub {
+  font-family:'Cinzel',serif; font-size:11px;
+  letter-spacing:.28em; text-transform:uppercase;
+  color:rgba(255,255,255,.78); position:relative;
+}
+.hdr-line {
+  display:flex; align-items:center; gap:10px;
+  margin:18px 0; position:relative;
+}
+.hdr-line::before,.hdr-line::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.3)}
+.hdr-line span{color:rgba(255,255,255,.6);font-size:14px}
+.hdr p {
+  font-size:15px; line-height:1.8; font-style:normal;
+  color:rgba(255,255,255,.88); position:relative;
+}
+.hdr .req-note {
+  margin-top:14px; font-family:'Cinzel',serif;
+  font-size:11px; letter-spacing:.06em;
+  color:rgba(255,255,255,.6); position:relative;
+}
+.hdr .req-note b { color:#fff; }
+
+/* ── PROGRESS ── */
+.prog-wrap { height:3px; background:rgba(255,255,255,.25); border-radius:2px; margin-top:16px; overflow:hidden; position:relative; }
+.prog-fill { height:100%; background:rgba(255,255,255,.7); border-radius:2px; width:0%; transition:width .4s; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border:1px solid rgba(114,17,198,.13);
+  border-top:none;
+  padding:30px 36px;
+  box-shadow:0 2px 10px rgba(114,17,198,.08);
+}
+.card:last-of-type { border-radius:0 0 8px 8px; border-bottom:2px solid var(--m-mid); }
+
+.sec-head {
+  font-family:'Cinzel',serif; font-size:10.5px;
+  letter-spacing:.28em; text-transform:uppercase;
+  color: var(--m); margin-bottom:22px;
+  padding-bottom:9px;
+  border-bottom:1.5px solid var(--border);
+  display:flex; align-items:center; gap:8px;
+}
+.sec-head .ico { font-size:16px; }
+
+/* ── FIELD ── */
+.field { margin-bottom:22px; }
+label {
+  display:block; font-family:'Cinzel',serif;
+  font-size:12.5px; color: var(--dark);
+  margin-bottom:8px; letter-spacing:.02em;
+}
+label .r { color: var(--red); margin-left:2px; }
+label .sub-hint {
+  display:block; font-family:'EB Garamond',serif;
+  font-size:12.5px; color: var(--hint);
+  font-style:normal; margin-top:2px;
+  letter-spacing:0; font-weight:400;
+}
+
+.two { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+@media(max-width:540px){ .two{grid-template-columns:1fr} }
+
+input[type=text],input[type=email],input[type=tel],textarea,select {
+  width:100%; background: var(--off);
+  border:1.5px solid var(--border); border-radius:4px;
+  color: var(--dark); font-family:'EB Garamond',serif;
+  font-size:16px; padding:10px 14px; outline:none;
+  transition:border-color .2s, box-shadow .2s, background .2s;
+}
+input:focus,textarea:focus,select:focus {
+  border-color: var(--m); background:#fff;
+  box-shadow:0 0 0 3px rgba(114,17,198,.15);
+}
+input::placeholder,textarea::placeholder { color:#9B6FCC; }
+textarea{resize:vertical;min-height:90px;line-height:1.65}
+select {
+  appearance:none; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg width='11' height='7' viewBox='0 0 11 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5.5 6L10 1' stroke='%237211C6' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 13px center; padding-right:36px;
+}
+select option{background:#fff;color: var(--dark)}
+
+/* ════════════════════════════════════
+   HORIZONTAL CATEGORY NAV (Myntra-style)
+   ════════════════════════════════════ */
+
+.courses-section {
+  background: var(--white);
+  border: 1px solid rgba(114,17,198,.13);
+  border-top: none;
+  box-shadow: 0 2px 10px rgba(114,17,198,.08);
+  position: relative;
+}
+
+.courses-header {
+  padding: 26px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selection-summary {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--hint);
+  font-style: italic;
+}
+.selection-summary b { color: var(--m); font-style: normal; font-family: 'Cinzel', serif; font-size: 12px; }
+
+/* Category pill strip */
+.cat-strip-wrap {
+  padding: 18px 24px 0;
+}
+
+.cat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border);
+  background: var(--off);
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'Cinzel', serif;
+  font-size: 10.5px;
+  letter-spacing: .03em;
+  color: var(--dark);
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+.cat-pill:hover {
+  border-color: var(--m2);
+  background: #EAD5FA;
+  color: var(--m);
+}
+.cat-pill.active {
+  background: var(--m);
+  border-color: var(--m);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(114,17,198,.3);
+}
+.cat-pill .pill-icon { font-size: 16px; }
+.cat-pill .pill-count {
+  font-family: 'EB Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0;
+  opacity: .7;
+  font-style: normal;
+}
+.cat-pill .pill-selected-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #FFD700;
+  display: none;
+  flex-shrink: 0;
+}
+.cat-pill.has-selection .pill-selected-dot { display: block; }
+.cat-pill.active.has-selection .pill-selected-dot { background: rgba(255,255,255,.9); }
+
+/* Underline strip */
+.cat-strip-line {
+  margin: 14px 24px 0;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* ════════════════════════════════════
+   OVERLAY PANEL
+   ════════════════════════════════════ */
+.overlay-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(21,0,34,.55);
+  backdrop-filter: blur(3px);
+  animation: fadeIn .2s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.overlay-panel.visible { display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; overflow-y: auto; }
+
+.overlay-box {
+  background: #fff;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 24px 80px rgba(114,17,198,.3);
+  animation: slideUp .25s cubic-bezier(.22,1,.36,1);
+  overflow: hidden;
+  position: relative;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+.overlay-top {
+  padding: 22px 28px 18px;
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #F5F0FA, #EAD5FA);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.overlay-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.overlay-title .ot-icon { font-size: 24px; }
+.overlay-title h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: .1em;
+  color: var(--dark);
+}
+.overlay-title .ot-count {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--hint);
+  font-style: normal;
+}
+
+.overlay-close {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--m);
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.overlay-close:hover { background: var(--m); color: #fff; border-color: var(--m); }
+
+/* Subcategory sidebar + course grid layout */
+.overlay-body {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  min-height: 440px;
+}
+
+.overlay-sidebar {
+  border-right: 1.5px solid var(--border);
+  padding: 16px 0;
+  background: #FAF8FC;
+}
+
+.subcat-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .06em;
+  color: var(--dark);
+  border-left: 3px solid transparent;
+  transition: all .15s;
+  user-select: none;
+}
+.subcat-btn:hover { background: #EAD5FA; color: var(--m); border-left-color: var(--m-mid); }
+.subcat-btn.active { background: #EAD5FA; color: var(--m); border-left-color: var(--m); font-weight: 700; }
+.subcat-btn .sb-count { font-family: 'EB Garamond', serif; font-size: 11px; color: var(--hint); letter-spacing:0; font-weight:400; margin-left:auto; }
+.subcat-btn .sb-dot { width:6px;height:6px;border-radius:50%;background:#FFD700;display:none;flex-shrink:0; }
+.subcat-btn.has-sel .sb-dot { display:block; }
+
+/* Course content area */
+.overlay-content {
+  padding: 20px 24px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.subcat-section { display: none; }
+.subcat-section.active { display: block; }
+
+.subcat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--hint);
+  margin-bottom: 12px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 5-column course grid */
+.course-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  margin-bottom: 24px;
+}
+@media(max-width: 900px) { .course-grid-5 { grid-template-columns: repeat(3,1fr); } }
+@media(max-width: 600px) { .course-grid-5 { grid-template-columns: repeat(2,1fr); } }
+
+/* Course tile */
+.ct {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 9px 10px;
+  border: 1.5px solid #C8A8F0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .15s;
+  background: var(--off);
+  user-select: none;
+  gap: 6px;
+}
+.ct:hover { border-color: var(--m2); background: #EAD5FA; }
+.ct.on { border-color: var(--m); background: #EAD5FA; }
+.ct input { display: none; }
+
+.ct-check {
+  width: 15px; height: 15px;
+  border: 1.5px solid #9B3FE8;
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.ct.on .ct-check {
+  background: var(--m);
+  border-color: var(--m);
+}
+.ct.on .ct-check::after {
+  content: '✓';
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.ct-txt {
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.3;
+}
+
+/* Overlay footer */
+.overlay-footer {
+  padding: 14px 28px;
+  border-top: 1.5px solid var(--border);
+  background: #FAF8FC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.overlay-footer .sel-info {
+  font-family: 'EB Garamond', serif;
+  font-size: 14px;
+  color: var(--hint);
+  font-style: italic;
+}
+.overlay-footer .sel-info b { color: var(--m); font-style: normal; font-weight: 700; }
+.btn-done {
+  background: linear-gradient(135deg, #5A0FA0, #9B3FE8 60%, #6A15B8);
+  border: none; color: #fff;
+  font-family: 'Cinzel', serif; font-size: 11px;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 11px 28px; cursor: pointer; border-radius: 5px;
+  box-shadow: 0 4px 14px rgba(114,17,198,.35);
+  transition: all .2s;
+}
+.btn-done:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(114,17,198,.5); }
+
+/* ── FORMAT OPTIONS ── */
+.format-opt:has(input:checked) {
+  border-color: var(--m);
+  background: #EAD5FA;
+  color: var(--m);
+}
+
+/* ── SUBMIT ── */
+.submit-area { text-align:center; padding:32px 0 12px; }
+.btn {
+  background: linear-gradient(135deg, #5A0FA0, #9B3FE8 60%, #6A15B8);
+  border:none; color:#fff;
+  font-family:'Cinzel',serif; font-size:12.5px;
+  letter-spacing:.22em; text-transform:uppercase;
+  padding:15px 50px; cursor:pointer; border-radius:5px;
+  box-shadow:0 4px 18px rgba(114,17,198,.35);
+  transition:all .25s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(114,17,198,.5)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-foot { font-family:'Cinzel',serif; font-size:10px; letter-spacing:.15em; color: var(--hint); margin-top:10px; }
+
+/* ── TOAST ── */
+.toast {
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(70px);
+  background: var(--dark);color:#fff;
+  font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:.08em;
+  padding:11px 26px;border-radius:4px;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  z-index:9999;opacity:0;transition:all .3s ease;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── SUCCESS ── */
+.success {
+  display:none;text-align:center;
+  padding:64px 36px;background: var(--white);
+  border:1.5px solid var(--m-mid);border-radius:8px;
+  box-shadow:0 4px 24px rgba(114,17,198,.1);
+}
+.success .ico2{font-size:60px;margin-bottom:16px;animation:bob 4s ease-in-out infinite alternate}
+.success h2{font-family:'Cinzel Decorative',cursive;color: var(--m);font-size:21px;margin-bottom:10px}
+.success .s-line{display:flex;align-items:center;gap:10px;margin:14px 0}
+.success .s-line::before,.success .s-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--m-mid),transparent)}
+.success .s-line span{color: var(--m)}
+.success p{color: var(--mid);font-size:16px;line-height:1.8;font-style:normal}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<div class="hdr">
+  <span class="hdr-icon"></span>
+  <h1>Occult Gurukul</h1>
+  <div class="sub">Mentor Interest Form</div>
+  <div class="hdr-line"><span></span></div>
+  <p>Be part of Occult Gurukul's landmark mentor marketplace. We are inviting practitioners at every stage of their journey to share their craft and guide others. Fill in your details, choose your areas of expertise, and let's connect.</p>
+  <div class="req-note"><b>*</b> Required fields</div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog"></div></div>
+</div>
+
+<form id="form" novalidate>
+
+<!-- 1 · BASIC DETAILS -->
+<div class="card">
+  <div class="sec-head"><span class="ico">☽</span> Your Details</div>
+
+  <div class="two">
+    <div class="field">
+      <label>Full Name <span class="r">*</span></label>
+      <input type="text" name="full_name" placeholder="Your full name" required>
+    </div>
+    <div class="field">
+      <label>Email Address <span class="r">*</span></label>
+      <input type="email" name="email" placeholder="you@email.com" required>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="field">
+      <label>WhatsApp Number <span class="r">*</span></label>
+      <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+    </div>
+    <div class="field">
+      <label>City & State <span class="r">*</span></label>
+      <input type="text" name="location" placeholder="e.g. Mumbai, Maharashtra" required>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Years of Practice <span class="r">*</span></label>
+    <select name="experience" required>
+      <option value="">- Select -</option>
+      <option>Less than 1 year</option>
+      <option>1-3 years</option>
+      <option>4-7 years</option>
+      <option>8-15 years</option>
+      <option>15+ years</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>How would you like to record your course?
+      <span class="sub-hint">Would you be more comfortable recording online from your own setup, or coming to our studio?</span>
+    </label>
+    <input type="text" name="social_link" placeholder="Online / Offline">
+  </div>
+</div>
+
+<!-- 2 · COURSE FORMAT -->
+<div class="card">
+  <div class="sec-head"><span class="ico">🎬</span> Course Format Preference</div>
+  <div class="field">
+    <label>How would you like to deliver your courses? <span class="r">*</span>
+      <span class="sub-hint">Select the format(s) you are comfortable with</span>
+    </label>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px;">
+      <label style="display:flex;align-items:center;gap:10px;font-family:'EB Garamond',serif;font-size:16px;letter-spacing:0;cursor:pointer;padding:12px 18px;border:1.5px solid var(--border);border-radius:6px;background:var(--off);transition:all .2s;" class="format-opt" for="fmt_live">
+        <input type="radio" name="course_format" id="fmt_live" value="Live Classes" style="width:auto;accent-color:var(--m);">
+        Live Classes
+      </label>
+      <label style="display:flex;align-items:center;gap:10px;font-family:'EB Garamond',serif;font-size:16px;letter-spacing:0;cursor:pointer;padding:12px 18px;border:1.5px solid var(--border);border-radius:6px;background:var(--off);transition:all .2s;" class="format-opt" for="fmt_recorded">
+        <input type="radio" name="course_format" id="fmt_recorded" value="Recorded Courses" style="width:auto;accent-color:var(--m);">
+        Recorded Courses
+      </label>
+      <label style="display:flex;align-items:center;gap:10px;font-family:'EB Garamond',serif;font-size:16px;letter-spacing:0;cursor:pointer;padding:12px 18px;border:1.5px solid var(--border);border-radius:6px;background:var(--off);transition:all .2s;" class="format-opt" for="fmt_both">
+        <input type="radio" name="course_format" id="fmt_both" value="Both" style="width:auto;accent-color:var(--m);">
+        Both
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- 3 · COURSES — horizontal nav -->
+<div class="courses-section">
+  <div class="courses-header">
+    <div class="sec-head" style="margin-bottom:0;border:none;padding-bottom:0;">
+      <span class="ico"></span> Which Courses Can You Teach?
+    </div>
+    <div class="selection-summary"><b id="totalCount">0</b> courses selected</div>
+  </div>
+
+  <!-- horizontal pill nav -->
+  <div class="cat-strip-wrap">
+    <div class="cat-strip" id="catStrip">
+      <div class="cat-pill" data-cat="astrology">
+        <span class="pill-icon">♈</span> Pure Astrology
+        <span class="pill-count">100</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="tarot">
+        <span class="pill-icon">🃏</span> Tarot & Divination
+        <span class="pill-count">95</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="energy">
+        <span class="pill-icon">🌀</span> Energy & Manifestation
+        <span class="pill-count">54</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="specialised">
+        <span class="pill-icon">📚</span> Specialised Tracks
+        <span class="pill-count">33</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="love">
+        <span class="pill-icon">💞</span> Love & Marriage
+        <span class="pill-count">40</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="health">
+        <span class="pill-icon">🌿</span> Health & Spiritual
+        <span class="pill-count">15</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="career">
+        <span class="pill-icon">💼</span> Career & Professional
+        <span class="pill-count">20</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="money">
+        <span class="pill-icon">💰</span> Money & Financial
+        <span class="pill-count">20</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+      <div class="cat-pill" data-cat="protection">
+        <span class="pill-icon">🛡️</span> Protection & Safety
+        <span class="pill-count">5</span>
+        <span class="pill-selected-dot"></span>
+      </div>
+    </div>
+  </div>
+  <div class="cat-strip-line"></div>
+
+  <!-- helper text -->
+  <p style="padding:14px 24px 20px;font-size:13.5px;color:var(--soft);font-style:normal;">
+    Tap a category above to browse and select courses you can teach.
+  </p>
+</div>
+
+<!-- 3 · MESSAGE -->
+<div class="card">
+  <div class="sec-head"><span class="ico">☾</span> Anything Else?</div>
+  <div class="field">
+    <label>Your Message / Questions
+      <span class="sub-hint">Tell us about courses you would like to teach, your doubts, or anything you'd like us to know</span>
+    </label>
+    <textarea name="message" placeholder="Share your doubts, or something you would like us to know about yourself..." rows="5"></textarea>
+  </div>
+</div>
+
+<div class="submit-area">
+  <button type="submit" class="btn" id="submitBtn">Submit Application</button>
+  <p class="form-foot">We'll review your application and reach out within a few days.</p>
+</div>
+
+</form>
+
+<!-- SUCCESS -->
+<div class="success" id="success">
+  <div class="ico2"></div>
+  <h2>Application Submitted!</h2>
+  <div class="s-line"><span></span></div>
+  <p>Thank you for applying to Occult Gurukul.<br>We'll review your details and reach out within 3-5 working days.</p>
+</div>
+
+</div><!-- wrap -->
+
+<!-- ══════════════ OVERLAY PANEL ══════════════ -->
+<div class="overlay-panel" id="overlayPanel">
+  <div class="overlay-box" id="overlayBox">
+    <div class="overlay-top">
+      <div class="overlay-title">
+        <span class="ot-icon" id="overlayIcon"></span>
+        <div>
+          <h2 id="overlayTitle">Category</h2>
+          <span class="ot-count" id="overlayCount"></span>
+        </div>
+      </div>
+      <button class="overlay-close" id="overlayClose" type="button">✕</button>
+    </div>
+
+    <div class="overlay-body">
+      <div class="overlay-sidebar" id="overlaySidebar"></div>
+      <div class="overlay-content" id="overlayContent"></div>
+    </div>
+
+    <div class="overlay-footer">
+      <div class="sel-info">Selected in this category: <b id="overlaySelCount">0</b></div>
+      <button class="btn-done" type="button" id="btnDone">Done ✓</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════ DATA ══════════════ -->
+<script>
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzcNPv86mD5R7q8lwVersF2byxfLd0P2d_0pTCwoKdUuIStWckWpHEfdwOe2OSMqYYM/exec';
+
+const CATEGORIES = {
+  astrology: {
+    icon: '♈', label: 'Pure Astrology', count: 100,
+    subcats: {
+      'Foundations & Chart Reading': ['Astrology Basics','12 Houses Deep Dive','12 Signs Psychology','9 Planets Explained','Lagna Importance','Moon Chart Reading','Sun Chart Reading','Planetary Dignities','Retrograde Planets','Combustion in Astrology','Aspects Explained','Conjunction Basics','Stellium Meaning','Elements & Modalities','Chart Structure Basics'],
+      'Chart Reading & Prediction': ['How to Read Any Chart','Lagna-Based Interpretation','Multi-Chart Synthesis','Transit Reading','Planetary Strength (Shadbala)','Yogas Identification','Prediction Basics','Advanced Prediction','Event Timing','Case Study Analysis','Birth Time Rectification','Chart Pattern Recognition','Planet Dominance','Weak Planet Fix','Chart Correction Techniques'],
+      'Dashas': ['Vimshottari Dasha','Yogini Dasha','Chara Dasha','Narayana Dasha','Kalachakra Dasha','Dasha Sandhi','Conditional Dashas','Dasha + Transit Integration','Life Timeline Mapping','Dasha Case Studies','Rahu Mahadasha','Saturn Mahadasha','Venus Mahadasha','Mars Mahadasha','Jupiter Mahadasha'],
+      'Divisional Charts': ['Navamsa (D9)','Dashamsa (D10)','Saptamsa (D7)','D12 Parents','D24 Education','D27 Strength','D30 Misfortune','D60 Karma','Vargas Integration','Predictive Vargas','Marriage via D9','Career via D10','Childbirth via D7','Spiritual Charts','Advanced Vargas'],
+      'Jaimini': ['Jaimini Basics','Karakas','Jaimini Raj Yogas','Marriage Indicators (Jaimini)','Argala','Jaimini Aspects','Career via Jaimini','Jaimini + Parashara'],
+      'Yogas & Doshas': ['Raj Yogas','Dhan Yogas','Vipreet Raj Yoga','Neech Bhanga','Kemadruma','Kala Sarpa','Manglik Dosha','Pitru Dosha','Guru Chandal','Daridra Yoga'],
+      'Muhurat': ['Muhurat Basics','Marriage Muhurat','Business Muhurat','Investment Muhurat','Property Muhurat','Surgery Muhurat','Travel Muhurat','Griha Pravesh Muhurat','Education Muhurat','Agreement Muhurat'],
+      'Prashna (Horary)': ['Prashna Basics','Yes/No Predictions (Prashna)','Lost Object (Prashna)','Relationship Questions (Prashna)','Career Questions (Prashna)','Finance Questions (Prashna)','Court Cases (Prashna)','Radical Charts','Moon in Prashna','Advanced Horary'],
+    }
+  },
+  tarot: {
+    icon: '🃏', label: 'Tarot & Divination', count: 95,
+    subcats: {
+      'Tarot': ['Tarot Card Meanings','Tarot Beginner Spreads','Love Tarot','Career Tarot','Tarot Timing Techniques','Tarot Combinations','Healing Tarot','Tarot Journaling','Professional Tarot','Intuitive Tarot','Shadow Tarot','Manifestation Tarot','Daily Tarot Practice','Tarot Ethics','Tarot + Intuition','Tarot Case Studies','Advanced Tarot','Tarot Business Setup','Tarot Mastery'],
+      'Runes': ['Rune Basics','Rune Meanings','Rune Casting','Rune Spreads','Advanced Runes','Rune Magic','Rune Protection','Rune Manifestation','Rune Healing','Rune Case Studies','Nordic Symbolism','Rune Rituals','Rune Energy Work','Rune Intuition','Rune Mastery'],
+      'Pendulum & Dowsing': ['Pendulum Basics','Yes/No Dowsing','Energy Detection','Chakra Dowsing','Dowsing Decision Making','Advanced Dowsing','Dowsing Maps','Healing Dowsing','Clearing Energy (Dowsing)','Dowsing Practice','Business Decisions (Dowsing)','Location Dowsing','Health Scanning (Dowsing)','Dowsing Mastery'],
+      'Psychic & Intuition': ['Intuition Activation','Third Eye Awakening','Psychic Development','Clairvoyance','Aura Reading','Energy Scanning','Psychic Protection','Remote Viewing','Spirit Communication','Advanced Psychic','Mediumship Basics','Energy Sensitivity','Intuitive Decision Making','Inner Guidance System','Reading People Energetically','Psychic Boundaries','Intuition for Business','Intuition for Relationships','Psychic Mastery'],
+      'Other Divination': ['Coffee Reading','Tea Reading','Dice Divination','Coin Divination','Bibliomancy','Charm Casting','Oil Divination','Rice Divination','Cowrie Reading','Dream Interpretation','Akashic Records','Past Life Reading','Spirit Animal Reading','Shamanic Journeying','Egyptian Oracle','Hermetic Systems','Hybrid Divination','Divination Mastery'],
+    }
+  },
+  energy: {
+    icon: '🌀', label: 'Energy, Healing & Manifestation', count: 54,
+    subcats: {
+      'Reiki': ['Reiki Level 1','Reiki Level 2','Daily Reiki Practice','Chakra Healing (Reiki)','Emotional Healing (Reiki)','Distance Healing','Money Healing (Reiki)','Relationship Healing (Reiki)','Health Healing (Reiki)','Energy Protection','Reiki + Manifestation','Reiki Case Studies','Reiki Business','Advanced Reiki','Reiki Mastery'],
+      'Vastu': ['Vastu Basics','Home Vastu','Office Vastu','Wealth Vastu','Relationship Vastu','Entrance Vastu','Bedroom Vastu','Kitchen Vastu','Zero-cost Vastu Remedies','Plants & Symbols (Vastu)','Vastu Space Clearing','Energy Flow (Vastu)','Vastu Case Studies','Advanced Vastu','Vastu Mastery'],
+      'Manifestation & Magic': ['Law of Attraction','Scripting','369 Method','Water Charging','Candle Magic','Sigil Creation','Mirror Work','Affirmations','Switchwords','Grabovoi Codes','Energy Shifting','Block Removal','Money Manifestation','Love Manifestation','Reality Shifting','Frequency Work','Shadow Work','Inner Child Healing','Cord Cutting','Aura Cleansing','Moon Rituals','Elemental Magic','Daily Ritual System','Manifestation Mastery'],
+    }
+  },
+  specialised: {
+    icon: '📚', label: 'Specialised Tracks', count: 33,
+    subcats: {
+      'Jaimini Track': ['Jaimini Track Basics','Karakas Deep Dive','Argala (Jaimini)','Jaimini Remedies','Jaimini for Professionals','Jaimini Certification'],
+      'Lal Kitab': ['Lal Kitab Basics','Houses in Lal Kitab','Planets in Lal Kitab','Lal Kitab Remedies System','Lal Kitab Debt & Money Remedies','Lal Kitab Relationship Remedies','Lal Kitab Health Remedies','Lal Kitab Career Remedies','Lal Kitab Dosha Correction','Lal Kitab Case Studies','Lal Kitab Advanced Remedies','Lal Kitab Ethics','Lal Kitab Mastery'],
+      'Numerology': ['Numerology Basics','Mulank','Bhagyank','Name Numerology','Mobile Number Analysis','Business Name Numerology','Signature Correction','Numerology Compatibility','Timing via Numbers','Numerology Remedies','Numerology Case Studies','Numerology + Astrology','Predictive Numerology','Numerology Mastery'],
+    }
+  },
+  love: {
+    icon: '💞', label: 'Love, Relationships & Marriage', count: 40,
+    subcats: {
+      'Love & Attraction': ['Attract Love (Astro + Energy)','Why You Attract Wrong Partners','Heal Love Life (Moon Energy)','Venus Activation for Love','Remove Emotional Blocks in Love','Calling in a Soulmate','Love Timing Through Astrology','Self-Love Activation Program','Heal Past Relationship Trauma','Love Manifestation in 21 Days','Why Love Doesn\'t Stay (Chart)','Open Your Heart Chakra','Attraction vs Attachment','Love Compatibility Basics','Reignite Passion in Relationships','Stop Chasing - Start Attracting','Remove Love Blockages (Karmic)','Divine Feminine / Masculine Balance','Energetic Boundaries in Love'],
+      'Marriage': ['Marriage Delay - Causes & Remedies','When Will You Get Married?','Arranged vs Love Marriage Indicators','Fixing Marriage Blockages','Manglik Dosha - Practical','Second Marriage Yogas','Strengthening Marriage Bond','In-Laws Harmony (Astrology)','Marriage Compatibility Deep Dive','Divorce Indicators & Prevention','Karmic Marriages Explained','Spouse Nature Prediction','Marriage Timing Masterclass','Fixing Repeated Broken Alliances','Healing Marriage Conflicts','Spouse Attraction Through Remedies','Marriage Stability Indicators'],
+    }
+  },
+  health: {
+    icon: '🌿', label: 'Health, Wellbeing & Spiritual Growth', count: 15,
+    subcats: {
+      'Health & Wellbeing': ['Stress & Anxiety Healing','Sleep Issues - Causes & Remedies','Emotional Healing (Moon)','Mental Clarity Activation','Overthinking Control System','Energy Detox & Cleansing','Healing Chronic Patterns','Inner Child Healing Program','Emotional Stability Techniques','Daily Energy Hygiene Routine'],
+      'Spiritual Growth': ['Find Your Life Purpose (Astrology)','Spiritual Awakening - Safe Path','Karma & Past Life Understanding','Connecting with Higher Guidance','Building a Spiritual Routine'],
+    }
+  },
+  career: {
+    icon: '💼', label: 'Career & Professional Growth', count: 20,
+    subcats: {
+      'Career Clarity & Direction': ['Find Your Right Career Path (Astrology)','Career Confusion to Clarity','Business vs Job – What Suits You','Entrepreneurship Astrology','Skill Alignment Through Chart','Finding Your Purpose Professionally','Personal Brand Energy'],
+      'Career Timing & Growth': ['Job Change Timing','Promotion Indicators','Government Job Yogas','Career Growth Blockages','Switching Careers Safely','Career Stability Indicators','Building Authority & Recognition'],
+      'Career Challenges & Energy': ['Saturn Lessons for Career','Work Stress & Burnout Healing','Decision Making in Career','Leadership Activation','Career Success Manifestation','Office Politics & Energy Protection'],
+    }
+  },
+  money: {
+    icon: '💰', label: 'Money & Financial Growth', count: 20,
+    subcats: {
+      'Wealth & Abundance': ['Wealth Yogas in Your Chart','Luxury & Lifestyle Yogas','Passive Income Indicators','Abundance Consciousness Training','Money Karma Healing','Wealth Manifestation System'],
+      'Money Blockages & Mindset': ['Remove Money Blockages','Money Mindset Reset','Stop Financial Leakages','Saving vs Spending Patterns','Financial Discipline Through Saturn','Money Energy Activation Rituals'],
+      'Financial Growth & Timing': ['Financial Stability Through Astrology','Income Growth Strategies (Astro + Energy)','Debt Removal Energy Work','Investment Timing Astrology','Business Profit Activation','Business Expansion Timing','Cash Flow Stability Techniques','Attracting Opportunities for Income'],
+    }
+  },
+  protection: {
+    icon: '🛡️', label: 'Protection & Energy Safety', count: 5,
+    subcats: {
+      'Protection & Shielding': ['Nazar (Evil Eye) Detection & Removal','Psychic Attack – Identification & Protection','Energy Shielding Basics','Home Energy Protection System','Cord Cutting & Energy Boundaries'],
+    }
+  }
+};
+
+// Track selected courses globally
+const selected = new Set();
+let activeCat = null;
+let activeSubcat = null;
+
+// ── OVERLAY OPEN ──
+function openOverlay(catKey) {
+  activeCat = catKey;
+  const cat = CATEGORIES[catKey];
+  const subcats = Object.keys(cat.subcats);
+
+  document.getElementById('overlayIcon').textContent = cat.icon;
+  document.getElementById('overlayTitle').textContent = cat.label;
+  document.getElementById('overlayCount').textContent = cat.count + ' courses';
+
+  // Build sidebar
+  const sidebar = document.getElementById('overlaySidebar');
+  sidebar.innerHTML = '';
+  subcats.forEach((sc, i) => {
+    const courses = cat.subcats[sc];
+    const selCount = courses.filter(c => selected.has(c)).length;
+    const btn = document.createElement('div');
+    btn.className = 'subcat-btn' + (selCount > 0 ? ' has-sel' : '') + (i === 0 ? ' active' : '');
+    btn.dataset.subcat = sc;
+    btn.innerHTML = `<span class="sb-dot"></span>${sc}<span class="sb-count">${courses.length}</span>`;
+    btn.addEventListener('click', () => activateSubcat(sc));
+    sidebar.appendChild(btn);
+  });
+
+  // Build content
+  const content = document.getElementById('overlayContent');
+  content.innerHTML = '';
+  subcats.forEach((sc, i) => {
+    const section = document.createElement('div');
+    section.className = 'subcat-section' + (i === 0 ? ' active' : '');
+    section.dataset.subcat = sc;
+
+    const label = document.createElement('div');
+    label.className = 'subcat-label';
+    label.textContent = sc;
+    section.appendChild(label);
+
+    const grid = document.createElement('div');
+    grid.className = 'course-grid-5';
+
+    cat.subcats[sc].forEach(course => {
+      const tile = document.createElement('div');
+      tile.className = 'ct' + (selected.has(course) ? ' on' : '');
+      tile.innerHTML = `<input type="checkbox" name="courses" value="${course}" ${selected.has(course)?'checked':''}><div class="ct-check"></div><span class="ct-txt">${course}</span>`;
+      tile.addEventListener('click', () => toggleCourse(course, tile, catKey));
+      grid.appendChild(tile);
+    });
+
+    section.appendChild(grid);
+    content.appendChild(section);
+  });
+
+  activeSubcat = subcats[0];
+  updateOverlaySelCount();
+  document.getElementById('overlayPanel').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function activateSubcat(sc) {
+  activeSubcat = sc;
+  document.querySelectorAll('.subcat-btn').forEach(b => b.classList.toggle('active', b.dataset.subcat === sc));
+  document.querySelectorAll('.subcat-section').forEach(s => s.classList.toggle('active', s.dataset.subcat === sc));
+}
+
+function toggleCourse(course, tile, catKey) {
+  if (selected.has(course)) {
+    selected.delete(course);
+    tile.classList.remove('on');
+    tile.querySelector('input').checked = false;
+  } else {
+    selected.add(course);
+    tile.classList.add('on');
+    tile.querySelector('input').checked = true;
+  }
+  updateOverlaySelCount();
+  updatePillDot(catKey);
+  updateTotalCount();
+  if (activeCat && activeSubcat) {
+    const cat = CATEGORIES[activeCat];
+    document.querySelectorAll('.subcat-btn').forEach(btn => {
+      const courses = cat.subcats[btn.dataset.subcat] || [];
+      const hasSel = courses.some(c => selected.has(c));
+      btn.classList.toggle('has-sel', hasSel);
+    });
+  }
+}
+
+function updateOverlaySelCount() {
+  if (!activeCat) return;
+  const cat = CATEGORIES[activeCat];
+  const allCourses = Object.values(cat.subcats).flat();
+  const count = allCourses.filter(c => selected.has(c)).length;
+  document.getElementById('overlaySelCount').textContent = count;
+}
+
+function updatePillDot(catKey) {
+  const cat = CATEGORIES[catKey];
+  const allCourses = Object.values(cat.subcats).flat();
+  const hasSel = allCourses.some(c => selected.has(c));
+  const pill = document.querySelector(`.cat-pill[data-cat="${catKey}"]`);
+  if (pill) pill.classList.toggle('has-selection', hasSel);
+}
+
+function updateTotalCount() {
+  document.getElementById('totalCount').textContent = selected.size;
+}
+
+function closeOverlay() {
+  document.getElementById('overlayPanel').classList.remove('visible');
+  document.body.style.overflow = '';
+  activeCat = null;
+}
+
+// ── EVENTS ──
+document.querySelectorAll('.cat-pill').forEach(pill => {
+  pill.addEventListener('click', () => openOverlay(pill.dataset.cat));
+});
+document.getElementById('overlayClose').addEventListener('click', closeOverlay);
+document.getElementById('btnDone').addEventListener('click', closeOverlay);
+document.getElementById('overlayPanel').addEventListener('click', e => {
+  if (e.target === document.getElementById('overlayPanel')) closeOverlay();
+});
+
+/* Progress */
+function updateProgress() {
+  const fields = ['full_name','email','phone','location','experience'];
+  const filled = fields.filter(n => {
+    const e = document.querySelector(`[name="${n}"]`);
+    return e && e.value.trim();
+  }).length;
+  document.getElementById('prog').style.width = Math.min(100, Math.round(filled / fields.length * 100)) + '%';
+}
+document.querySelectorAll('input,textarea,select').forEach(el => {
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+
+/* Toast */
+function toast(msg, ms=4000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), ms);
+}
+
+/* Collect selected courses */
+function getCourses() {
+  return selected.size > 0 ? [...selected].join(', ') : 'None selected';
+}
+
+/* Submit */
+document.getElementById('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const req = {
+    full_name: 'Full Name', email: 'Email Address',
+    phone: 'WhatsApp Number', location: 'City & State', experience: 'Years of Practice'
+  };
+  for (const [name, label] of Object.entries(req)) {
+    const el = document.querySelector(`[name="${name}"]`);
+    if (!el || !el.value.trim()) { toast(`⚠ Please fill in: ${label}`); el && el.focus(); return; }
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Submitting...';
+
+  const payload = {
+    full_name:    document.querySelector('[name=full_name]').value.trim(),
+    email:        document.querySelector('[name=email]').value.trim(),
+    phone:        document.querySelector('[name=phone]').value.trim(),
+    location:     document.querySelector('[name=location]').value.trim(),
+    experience:   document.querySelector('[name=experience]').value.trim(),
+    social_link:  document.querySelector('[name=social_link]').value.trim(),
+    course_format: (document.querySelector('[name=course_format]:checked') || {value:''}).value,
+    courses:      getCourses(),
+    message:      document.querySelector('[name=message]').value.trim(),
+    submitted_at: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+  };
+
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    document.getElementById('form').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch {
+    toast('✗ Network error — please check your connection and try again.', 6000);
+    btn.disabled = false; btn.textContent = 'Submit Application';
+  }
+});
+</script>
+
+</body>
+</html>
