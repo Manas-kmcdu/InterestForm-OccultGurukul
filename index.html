@@ -355,6 +355,7 @@ select option{background:#fff;color: var(--dark)}
   .ct-txt { font-size: 12px; }
   .overlay-footer { padding: 10px 16px; }
 }
+
 /* Course content area */
 .overlay-content {
   padding: 20px 24px;
@@ -460,6 +461,50 @@ select option{background:#fff;color: var(--dark)}
   transition: all .2s;
 }
 .btn-done:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(114,17,198,.5); }
+
+/* ── COURSE SUMMARY ── */
+.course-summary {
+  display: none;
+  margin: 0 24px 24px;
+  padding: 16px 20px;
+  background: #F0E6FA;
+  border: 1.5px solid var(--m-mid);
+  border-radius: 6px;
+}
+.course-summary.visible { display: block; }
+.course-summary-head {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--m);
+  margin-bottom: 10px;
+}
+.course-summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.course-tag {
+  background: #fff;
+  border: 1px solid var(--m-mid);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-family: 'EB Garamond', serif;
+  font-size: 13px;
+  color: var(--mid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.course-tag .tag-remove {
+  cursor: pointer;
+  color: var(--m);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+}
+.course-tag .tag-remove:hover { color: var(--red); }
 
 /* ── FORMAT OPTIONS ── */
 .format-opt:has(input:checked) {
@@ -662,6 +707,12 @@ select option{background:#fff;color: var(--dark)}
   <p style="padding:14px 24px 20px;font-size:13.5px;color:var(--soft);font-style:normal;">
     Tap a category above to browse and select courses you can teach.
   </p>
+
+  <!-- course summary -->
+  <div class="course-summary" id="courseSummary">
+    <div class="course-summary-head">✦ Selected Courses</div>
+    <div class="course-summary-tags" id="courseTags"></div>
+  </div>
 </div>
 
 <!-- 3 · MESSAGE -->
@@ -722,7 +773,7 @@ select option{background:#fff;color: var(--dark)}
 
 <!-- ══════════════ DATA ══════════════ -->
 <script>
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyG0mq9YHiamPB9PBndQf9ZzYK0U7Xp1zfaK63VY3O6oC3qd9vItAB6wGKKjq2SMfnV/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzcNPv86mD5R7q8lwVersF2byxfLd0P2d_0pTCwoKdUuIStWckWpHEfdwOe2OSMqYYM/exec';
 
 const CATEGORIES = {
   astrology: {
@@ -738,7 +789,6 @@ const CATEGORIES = {
       'Prashna (Horary)': ['Prashna Basics','Yes/No Predictions (Prashna)','Lost Object (Prashna)','Relationship Questions (Prashna)','Career Questions (Prashna)','Finance Questions (Prashna)','Court Cases (Prashna)','Radical Charts','Moon in Prashna','Advanced Horary'],
     }
   },
-  
   tarot: {
     icon: '🃏', label: 'Tarot & Divination', count: 95,
     subcats: {
@@ -913,6 +963,41 @@ function updatePillDot(catKey) {
 
 function updateTotalCount() {
   document.getElementById('totalCount').textContent = selected.size;
+  updateCourseSummary();
+}
+
+function updateCourseSummary() {
+  const summary = document.getElementById('courseSummary');
+  const tags = document.getElementById('courseTags');
+  if (selected.size === 0) {
+    summary.classList.remove('visible');
+    return;
+  }
+  summary.classList.add('visible');
+  tags.innerHTML = '';
+  [...selected].forEach(course => {
+    const tag = document.createElement('span');
+    tag.className = 'course-tag';
+    tag.innerHTML = `${course}<span class="tag-remove" title="Remove" data-course="${course}">✕</span>`;
+    tag.querySelector('.tag-remove').addEventListener('click', (e) => {
+      e.stopPropagation();
+      selected.delete(course);
+      // uncheck tile if overlay open
+      document.querySelectorAll('.ct').forEach(tile => {
+        const input = tile.querySelector('input');
+        if (input && input.value === course) {
+          tile.classList.remove('on');
+          input.checked = false;
+        }
+      });
+      updateOverlaySelCount();
+      if (activeCat) updatePillDot(activeCat);
+      // update all pill dots
+      Object.keys(CATEGORIES).forEach(k => updatePillDot(k));
+      updateTotalCount();
+    });
+    tags.appendChild(tag);
+  });
 }
 
 function closeOverlay() {
