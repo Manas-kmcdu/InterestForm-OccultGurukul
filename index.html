@@ -860,7 +860,7 @@ select option{background:#fff;color: var(--dark)}
 
 <!-- ══════════════ DATA ══════════════ -->
 <script>
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwwHUcMxnCnnQPwjPj9lAcwkQZmyRRQmj_7h_9K4PWmX8aJwTr-wZsh_8F0Us3psaXj/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzmS0FGd0lEFeif9fUuf4vD_meih8920ynOgNkoBNkH8z9I3j-aZXwebuThQ5zyWdzg/exec';
 
 const CATEGORIES = {
   astrology: {
@@ -1168,7 +1168,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
     document.getElementById('success').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch {
-    toast('✗ Network error — please check your connection and try again.', 6000);
+    toast('✗ Network error - please check your connection and try again.', 6000);
     btn.disabled = false; btn.textContent = 'Submit Application';
   }
 });
